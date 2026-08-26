@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillSpy — See What Employers Really Want</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f8fc;
+      color: #172033;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 8%;
+      background: white;
+      border-bottom: 1px solid #e8eaf0;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      margin-right: 6px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #172033;
+      font-weight: 600;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 90px 20px 70px;
+      background: linear-gradient(135deg, #fff7ed, #f5f3ff);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 15px;
+      border-radius: 30px;
+      background: white;
+      border: 1px solid #e5e7eb;
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: 54px;
+      line-height: 1.08;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .highlight {
+      color: #7c3aed;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 22px auto 32px;
+      font-size: 19px;
+      line-height: 1.6;
+      color: #596275;
+    }
+
+    .search-box {
+      max-width: 650px;
+      margin: auto;
+      background: white;
+      padding: 8px;
+      border-radius: 14px;
+      display: flex;
+      gap: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 16px;
+      font-size: 16px;
+    }
+
+    .search-box button {
+      border: none;
+      background: #7c3aed;
+      color: white;
+      padding: 15px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .section {
+      padding: 70px 8%;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .section-intro {
+      color: #687084;
+      margin-bottom: 40px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      max-width: 1050px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      text-align: left;
+      border: 1px solid #e8eaf0;
+    }
+
+    .card-icon {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #687084;
+      line-height: 1.5;
+    }
+
+    .cta {
+      margin: 20px 8% 70px;
+      padding: 55px 30px;
+      text-align: center;
+      border-radius: 24px;
+      background: #172033;
+      color: white;
+    }
+
+    .cta p {
+      margin: 15px auto 25px;
+      color: #cbd1dd;
+    }
+
+    .cta button {
+      border: none;
+      background: white;
+      color: #172033;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #7b8495;
+      background: white;
+      border-top: 1px solid #e8eaf0;
+    }
+
+    @media (max-width: 750px) {
+      h1 {
+        font-size: 38px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo"><span>🕵️</span> SkillSpy</div>
+    <a href="#how">How it works</a>
+  </nav>
+
+  <section class="hero">
+    <div class="badge">🕵️ Career intelligence, decoded</div>
+
+    <h1>
+      See what employers are
+      <span class="highlight">really looking for.</span>
+    </h1>
+
+    <p>
+      SkillSpy uncovers the skills, tools and interview expectations
+      hidden inside real job postings.
+    </p>
+
+    <div class="search-box">
+      <input
+        type="text"
+        placeholder="Try a role: Data Analyst, HR, Finance..."
+      >
+      <button onclick="alert('SkillSpy analysis coming next!')">
+        Spy the Role 🔎
+      </button>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <h2>What does SkillSpy uncover?</h2>
+
+    <p class="section-intro">
+      Turn messy job descriptions into useful career intelligence.
+    </p>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">🔎</div>
+        <h3>Skills We've Spotted</h3>
+        <p>
+          Discover the skills employers repeatedly mention
+          across real job postings.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🛠️</div>
+        <h3>Tools They Expect</h3>
+        <p>
+          Find the software, platforms and technologies
+          commonly required for a role.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎯</div>
+        <h3>Interview Focus</h3>
+        <p>
+          Understand what you should prepare for before
+          walking into the interview.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Ready to spy on your next role? 🕵️</h2>
+
+    <p>
+      Know what the market wants before you start preparing.
+    </p>
+
+    <button onclick="alert('Your SkillSpy journey starts here!')">
+      Start Exploring
+    </button>
+  </section>
+
+  <footer>
+    © 2026 SkillSpy · See what employers are really looking for.
+  </footer>
+
+</body>
+</html>
