@@ -920,87 +920,62 @@ function analyzeJobDescription() {
         behavior: "smooth"
     });
   }
-  
-function sendMessage() {
-  const input = document.getElementById("chatInput");
-  const messages = document.getElementById("chatMessages");
+ async function sendMessage() {
+    const input = document.getElementById("chatInput");
+    const messages = document.getElementById("chatMessages");
 
-  const question = input.value.trim();
+    const question = input.value.trim();
 
-  if (!question) {
-    return;
-  }
+    if (!question) {
+        return;
+    }
 
-  // Add user's message
-  const userMessage = document.createElement("div");
-  userMessage.className = "user-message";
-  userMessage.textContent = question;
+    // Add user's message
+    const userMessage = document.createElement("div");
+    userMessage.className = "user-message";
+    userMessage.textContent = question;
+    messages.appendChild(userMessage);
 
-  messages.appendChild(userMessage);
+    // Clear input
+    input.value = "";
 
-  // Clear input
-  input.value = "";
-
-  // Create bot response
-  const botMessage = document.createElement("div");
-  botMessage.className = "bot-message";
-
-  const lowerQuestion = question.toLowerCase();
-
-  let response = "";
-
-  if (
-    lowerQuestion.includes("hr") ||
-    lowerQuestion.includes("human resource")
-  ) {
-    response =
-      "For an HR role, focus on HR Operations, Recruitment, Employee Engagement, Performance Management, HR Policies, Employee Relations and Stakeholder Management.";
-  }
-
-  else if (
-    lowerQuestion.includes("interview") ||
-    lowerQuestion.includes("prepare")
-  ) {
-    response =
-      "For interview preparation, understand the role requirements, prepare STAR-based examples from your experience, and be ready to explain your impact with measurable results.";
-  }
-
-  else if (
-    lowerQuestion.includes("skill") ||
-    lowerQuestion.includes("skills")
-  ) {
-    response =
-      "The most important skills depend on the role. SkillSpy can help you identify technical skills, soft skills, tools and interview expectations from a job description.";
-  }
-
-  else if (
-    lowerQuestion.includes("resume") ||
-    lowerQuestion.includes("cv")
-  ) {
-    response =
-      "For a stronger resume, highlight measurable achievements, relevant skills, tools you have used, and experience that directly matches the job description.";
-  }
-
-  else if (
-    lowerQuestion.includes("career") ||
-    lowerQuestion.includes("growth")
-  ) {
-    response =
-      "A good career strategy starts with understanding the skills employers want, identifying your gaps, building relevant experience and preparing for interviews strategically.";
-  }
-
-  else {
-    response =
-      "That's a great question! Try asking me about skills, interviews, HR roles, resumes or career growth. 🤖";
-  }
-
-  // Show response after a short delay
-  setTimeout(function () {
-    botMessage.textContent = response;
+    // Add temporary typing message
+    const botMessage = document.createElement("div");
+    botMessage.className = "bot-message";
+    botMessage.textContent = "Thinking... 🤖";
     messages.appendChild(botMessage);
 
     messages.scrollTop = messages.scrollHeight;
-  }, 500);
-}</script>
+
+    try {
+        const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: question
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Something went wrong.");
+        }
+
+        botMessage.textContent =
+            data.answer || "Sorry, I couldn't generate a response.";
+
+    } catch (error) {
+        console.error("AI Chat Error:", error);
+
+        botMessage.textContent =
+            "Sorry, I'm having trouble connecting to the AI right now. 🤖";
+    }
+
+    messages.scrollTop = messages.scrollHeight;
+} 
+</script>
 </body>
 </html>
