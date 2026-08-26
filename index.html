@@ -336,6 +336,188 @@ function analyzeRole() {
         oldResult.remove();
     }
 
+    const roleLower = role.toLowerCase();
+
+    let skills = [];
+    let tools = [];
+    let interview = [];
+    let preparation = [];
+
+    /* HR ROLES */
+    if (
+        roleLower.includes("hr") ||
+        roleLower.includes("human resource") ||
+        roleLower.includes("hrbp") ||
+        roleLower.includes("recruiter")
+    ) {
+        skills = [
+            "HR Operations",
+            "Employee Engagement",
+            "Recruitment",
+            "Performance Management",
+            "Stakeholder Management"
+        ];
+
+        tools = [
+            "HRMS",
+            "Excel",
+            "ATS",
+            "HR Analytics Tools"
+        ];
+
+        interview = [
+            "Employee relations scenarios",
+            "Recruitment & hiring",
+            "Performance management",
+            "Stakeholder management"
+        ];
+
+        preparation = [
+            "HR policies & processes",
+            "Employee engagement examples",
+            "Recruitment metrics",
+            "Conflict-resolution scenarios"
+        ];
+
+    /* DATA ROLES */
+    } else if (
+        roleLower.includes("data analyst") ||
+        roleLower.includes("data analytics") ||
+        roleLower.includes("business analyst")
+    ) {
+        skills = [
+            "Data Analysis",
+            "Problem Solving",
+            "Statistical Thinking",
+            "Data Visualization",
+            "Business Communication"
+        ];
+
+        tools = [
+            "Excel",
+            "SQL",
+            "Power BI",
+            "Tableau",
+            "Python"
+        ];
+
+        interview = [
+            "SQL questions",
+            "Case studies",
+            "Data interpretation",
+            "Analytical problem solving"
+        ];
+
+        preparation = [
+            "SQL queries",
+            "Excel functions",
+            "Dashboard creation",
+            "Business case studies"
+        ];
+
+    /* FINANCE ROLES */
+    } else if (
+        roleLower.includes("finance") ||
+        roleLower.includes("financial analyst") ||
+        roleLower.includes("account")
+    ) {
+        skills = [
+            "Financial Analysis",
+            "Budgeting",
+            "Forecasting",
+            "Financial Reporting",
+            "Attention to Detail"
+        ];
+
+        tools = [
+            "Excel",
+            "SAP",
+            "Power BI",
+            "Financial Reporting Systems"
+        ];
+
+        interview = [
+            "Financial analysis",
+            "Budgeting scenarios",
+            "Accounting concepts",
+            "Business problem solving"
+        ];
+
+        preparation = [
+            "Financial statements",
+            "Excel modelling",
+            "Budgeting & forecasting",
+            "Finance case studies"
+        ];
+
+    /* SOFTWARE / ENGINEERING ROLES */
+    } else if (
+        roleLower.includes("software") ||
+        roleLower.includes("developer") ||
+        roleLower.includes("engineer")
+    ) {
+        skills = [
+            "Programming",
+            "Problem Solving",
+            "System Design",
+            "Debugging",
+            "Technical Communication"
+        ];
+
+        tools = [
+            "Git",
+            "GitHub",
+            "VS Code",
+            "Cloud Platforms",
+            "Development Frameworks"
+        ];
+
+        interview = [
+            "Coding problems",
+            "Technical fundamentals",
+            "System design",
+            "Problem solving"
+        ];
+
+        preparation = [
+            "Data structures & algorithms",
+            "Programming fundamentals",
+            "System design",
+            "Project explanations"
+        ];
+
+    /* DEFAULT */
+    } else {
+        skills = [
+            "Communication",
+            "Problem Solving",
+            "Stakeholder Management",
+            "Analytical Thinking",
+            "Adaptability"
+        ];
+
+        tools = [
+            "Excel",
+            "Reporting Tools",
+            "Collaboration Platforms",
+            "Role-specific Software"
+        ];
+
+        interview = [
+            "Role knowledge",
+            "Scenario-based questions",
+            "Problem solving",
+            "Stakeholder management"
+        ];
+
+        preparation = [
+            "Understand the job description",
+            "Prepare examples from your experience",
+            "Research the company",
+            "Prepare role-specific questions"
+        ];
+    }
+
     const result = document.createElement("div");
     result.id = "analysis-result";
 
@@ -361,27 +543,16 @@ function analyzeRole() {
             <hr>
 
             <h3>🧠 Key Skills</h3>
-            <p>
-                Communication · Problem Solving · Stakeholder Management ·
-                Analytical Thinking
-            </p>
+            <p>${skills.join(" · ")}</p>
 
             <h3>🛠️ Common Tools</h3>
-            <p>
-                Excel · HRMS · ATS · Reporting & Analytics Tools
-            </p>
+            <p>${tools.join(" · ")}</p>
 
             <h3>🎯 Interview Focus</h3>
-            <p>
-                Scenario-based questions · Role knowledge ·
-                Problem solving · Stakeholder management
-            </p>
+            <p>${interview.join(" · ")}</p>
 
             <h3>⭐ What to Prepare</h3>
-            <p>
-                Understand the role requirements, prepare examples from
-                your experience, and be ready to explain your impact.
-            </p>
+            <p>${preparation.join(" · ")}</p>
 
         </div>
     `;
