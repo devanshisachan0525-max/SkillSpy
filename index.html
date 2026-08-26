@@ -232,6 +232,134 @@ input:focus {
   border-color: #7c3aed;
   box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.10);
 }
+  /* ==============================
+   AI CAREER ASSISTANT
+   ============================== */
+
+.ai-assistant {
+  padding: 80px 20px;
+}
+
+.ai-assistant h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.ai-assistant .section-intro {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.chatbot {
+  max-width: 760px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 15px 45px rgba(30, 20, 80, 0.12);
+  border: 1px solid #eee8ff;
+}
+
+.chat-header {
+  background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+  color: white;
+  padding: 20px 24px;
+}
+
+.chat-header strong {
+  display: block;
+  font-size: 18px;
+}
+
+.chat-header span {
+  display: block;
+  margin-top: 5px;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.chat-messages {
+  min-height: 220px;
+  max-height: 360px;
+  overflow-y: auto;
+  padding: 25px;
+  background: #faf9ff;
+}
+
+.bot-message,
+.user-message {
+  max-width: 80%;
+  padding: 14px 18px;
+  margin-bottom: 15px;
+  border-radius: 16px;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+.bot-message {
+  background: white;
+  border: 1px solid #eee8ff;
+  margin-right: auto;
+}
+
+.user-message {
+  background: #7c3aed;
+  color: white;
+  margin-left: auto;
+}
+
+.chat-input {
+  display: flex;
+  gap: 12px;
+  padding: 18px;
+  background: white;
+  border-top: 1px solid #eee8ff;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 14px 16px;
+  border: 1px solid #ddd6fe;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+}
+
+.chat-input input:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.chat-input button {
+  border: none;
+  background: #7c3aed;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.chat-input button:hover {
+  transform: translateY(-1px);
+  background: #6d28d9;
+}
+
+@media (max-width: 600px) {
+  .chat-input {
+    flex-direction: column;
+  }
+
+  .chat-input button {
+    width: 100%;
+  }
+
+  .bot-message,
+  .user-message {
+    max-width: 90%;
+  }
+}
   </style>
 </head>
 
@@ -305,6 +433,70 @@ input:focus {
     </div>
   </section>
 
+
+  <section class="section" id="jd-analyzer">
+
+    <h2>📄 Analyze a Job Description</h2>
+
+    <p class="section-intro">
+        Paste a job description and SkillSpy will identify the key skills,
+        tools, responsibilities and interview expectations.
+    </p>
+
+    <div class="jd-box">
+
+        <textarea
+            id="jobDescription"
+            placeholder="Paste the job description here...">
+        </textarea>
+
+        <button onclick="analyzeJobDescription()">
+            Analyze Job Description 🔎
+        </button>
+
+    </div>
+
+</section>
+  <section class="section ai-assistant" id="ai-assistant">
+
+  <h2>🤖 Meet Your SkillSpy Career Assistant</h2>
+
+  <p class="section-intro">
+    Ask questions about a role, interview preparation, skills, or career growth.
+  </p>
+
+  <div class="chatbot">
+
+    <div class="chat-header">
+      <div>
+        <strong>SkillSpy AI Assistant</strong>
+        <span>● Online</span>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="bot-message">
+        Hi! 👋 I'm your SkillSpy Career Assistant.
+        <br><br>
+        Ask me about a job role, skills, interviews, or career preparation.
+      </div>
+    </div>
+
+    <div class="chat-input">
+      <input
+        type="text"
+        id="chatInput"
+        placeholder="Ask me something about your career..."
+      >
+
+      <button onclick="sendMessage()">
+        Send ➤
+      </button>
+    </div>
+
+  </div>
+
+</section>
   <section class="cta">
     <h2>Ready to spy on your next role? 🕵️</h2>
 
@@ -563,6 +755,250 @@ function analyzeRole() {
         behavior: "smooth"
     });
 }
-</script>
+function analyzeJobDescription() {
+
+    const jdInput = document.getElementById("jobDescription");
+    const jd = jdInput.value.trim();
+
+    if (!jd) {
+        alert("Please paste a job description first!");
+        return;
+    }
+
+    const text = jd.toLowerCase();
+
+    // Skill categories
+    const skills = [
+        "communication",
+        "stakeholder management",
+        "problem solving",
+        "analytical thinking",
+        "leadership",
+        "team management",
+        "employee engagement",
+        "recruitment",
+        "talent acquisition",
+        "performance management",
+        "hr operations",
+        "employee relations",
+        "data analysis",
+        "project management",
+        "strategic thinking"
+    ];
+
+    const tools = [
+        "excel",
+        "sap",
+        "workday",
+        "successfactors",
+        "keka",
+        "hono",
+        "oracle",
+        "power bi",
+        "tableau",
+        "ats",
+        "hrms"
+    ];
+
+    const foundSkills = skills.filter(skill => text.includes(skill));
+    const foundTools = tools.filter(tool => text.includes(tool));
+
+    // Extract experience requirement
+    const experienceMatch = jd.match(
+        /(\d+)\s*(?:-|to)?\s*(\d+)?\s*(?:years?|yrs?)/i
+    );
+
+    let experience = "Not clearly specified";
+
+    if (experienceMatch) {
+        if (experienceMatch[2]) {
+            experience =
+                experienceMatch[1] + "–" + experienceMatch[2] + " years";
+        } else {
+            experience = experienceMatch[1] + "+ years";
+        }
+    }
+
+    // Determine interview focus
+    const interviewFocus = [];
+
+    if (
+        text.includes("recruitment") ||
+        text.includes("talent acquisition") ||
+        text.includes("hiring")
+    ) {
+        interviewFocus.push("Recruitment & hiring");
+    }
+
+    if (
+        text.includes("employee engagement") ||
+        text.includes("employee relations")
+    ) {
+        interviewFocus.push("Employee engagement & relations");
+    }
+
+    if (
+        text.includes("performance management") ||
+        text.includes("kpi") ||
+        text.includes("kra")
+    ) {
+        interviewFocus.push("Performance management");
+    }
+
+    if (
+        text.includes("stakeholder") ||
+        text.includes("business partner")
+    ) {
+        interviewFocus.push("Stakeholder management");
+    }
+
+    if (
+        text.includes("analytics") ||
+        text.includes("data") ||
+        text.includes("reporting")
+    ) {
+        interviewFocus.push("HR analytics & reporting");
+    }
+
+    if (interviewFocus.length === 0) {
+        interviewFocus.push("Role knowledge & scenario-based questions");
+    }
+
+    // Remove previous result
+    const oldResult = document.getElementById("jd-analysis-result");
+
+    if (oldResult) {
+        oldResult.remove();
+    }
+
+    // Create result container
+    const result = document.createElement("div");
+
+    result.id = "jd-analysis-result";
+    result.className = "analysis-result";
+
+    result.innerHTML = `
+        <h2>🔎 Job Description Analysis</h2>
+
+        <h3>🧠 Key Skills</h3>
+        <p>
+            ${
+                foundSkills.length
+                    ? foundSkills.join(" · ")
+                    : "No specific skills detected yet."
+            }
+        </p>
+
+        <h3>🛠️ Common Tools</h3>
+        <p>
+            ${
+                foundTools.length
+                    ? foundTools.join(" · ")
+                    : "No specific tools detected yet."
+            }
+        </p>
+
+        <h3>💼 Experience Requirement</h3>
+        <p>${experience}</p>
+
+        <h3>🎯 Interview Focus</h3>
+        <p>${interviewFocus.join(" · ")}</p>
+
+        <h3>⭐ What to Prepare</h3>
+        <p>
+            Prepare examples from your experience that demonstrate
+            the skills and responsibilities mentioned in this job description.
+        </p>
+    `;
+
+    // Add result after JD analyzer
+    document
+        .getElementById("jd-analyzer")
+        .appendChild(result);
+
+    result.scrollIntoView({
+        behavior: "smooth"
+    });
+function sendMessage() {
+  const input = document.getElementById("chatInput");
+  const messages = document.getElementById("chatMessages");
+
+  const question = input.value.trim();
+
+  if (!question) {
+    return;
+  }
+
+  // Add user's message
+  const userMessage = document.createElement("div");
+  userMessage.className = "user-message";
+  userMessage.textContent = question;
+
+  messages.appendChild(userMessage);
+
+  // Clear input
+  input.value = "";
+
+  // Create bot response
+  const botMessage = document.createElement("div");
+  botMessage.className = "bot-message";
+
+  const lowerQuestion = question.toLowerCase();
+
+  let response = "";
+
+  if (
+    lowerQuestion.includes("hr") ||
+    lowerQuestion.includes("human resource")
+  ) {
+    response =
+      "For an HR role, focus on HR Operations, Recruitment, Employee Engagement, Performance Management, HR Policies, Employee Relations and Stakeholder Management.";
+  }
+
+  else if (
+    lowerQuestion.includes("interview") ||
+    lowerQuestion.includes("prepare")
+  ) {
+    response =
+      "For interview preparation, understand the role requirements, prepare STAR-based examples from your experience, and be ready to explain your impact with measurable results.";
+  }
+
+  else if (
+    lowerQuestion.includes("skill") ||
+    lowerQuestion.includes("skills")
+  ) {
+    response =
+      "The most important skills depend on the role. SkillSpy can help you identify technical skills, soft skills, tools and interview expectations from a job description.";
+  }
+
+  else if (
+    lowerQuestion.includes("resume") ||
+    lowerQuestion.includes("cv")
+  ) {
+    response =
+      "For a stronger resume, highlight measurable achievements, relevant skills, tools you have used, and experience that directly matches the job description.";
+  }
+
+  else if (
+    lowerQuestion.includes("career") ||
+    lowerQuestion.includes("growth")
+  ) {
+    response =
+      "A good career strategy starts with understanding the skills employers want, identifying your gaps, building relevant experience and preparing for interviews strategically.";
+  }
+
+  else {
+    response =
+      "That's a great question! Try asking me about skills, interviews, HR roles, resumes or career growth. 🤖";
+  }
+
+  // Show response after a short delay
+  setTimeout(function () {
+    botMessage.textContent = response;
+    messages.appendChild(botMessage);
+
+    messages.scrollTop = messages.scrollHeight;
+  }, 500);
+}</script>
 </body>
 </html>
