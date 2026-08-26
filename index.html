@@ -260,9 +260,9 @@ input:focus {
         type="text"
         placeholder="Try a role: Data Analyst, HR, Finance..."
       >
-      <button onclick="alert('SkillSpy analysis coming next!')">
-        Spy the Role 🔎
-      </button>
+      <button onclick="analyzeRole()">
+    Spy the Role 🔎
+</button>
     </div>
   </section>
 
@@ -320,6 +320,18 @@ input:focus {
   <footer>
     © 2026 SkillSpy · See what employers are really looking for.
   </footer>
+<script>
+function analyzeRole() {
+    const roleInput = document.querySelector('input[type="text"]');
+    const role = roleInput.value.trim();
 
+    if (!role) {
+        alert("Please enter a role first!");
+        return;
+    }
+
+    alert("Analyzing " + role + " 🔎");
+}
+</script>
 </body>
 </html>
