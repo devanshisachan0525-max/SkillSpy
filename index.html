@@ -330,7 +330,67 @@ function analyzeRole() {
         return;
     }
 
-    alert("Analyzing " + role + " 🔎");
+    const oldResult = document.getElementById("analysis-result");
+
+    if (oldResult) {
+        oldResult.remove();
+    }
+
+    const result = document.createElement("div");
+    result.id = "analysis-result";
+
+    result.innerHTML = `
+        <div style="
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 32px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            text-align: left;
+        ">
+
+            <h2 style="margin-top:0;">
+                🔎 SkillSpy Analysis
+            </h2>
+
+            <p style="font-size:18px;">
+                Analysis for <strong>${role}</strong>
+            </p>
+
+            <hr>
+
+            <h3>🧠 Key Skills</h3>
+            <p>
+                Communication · Problem Solving · Stakeholder Management ·
+                Analytical Thinking
+            </p>
+
+            <h3>🛠️ Common Tools</h3>
+            <p>
+                Excel · HRMS · ATS · Reporting & Analytics Tools
+            </p>
+
+            <h3>🎯 Interview Focus</h3>
+            <p>
+                Scenario-based questions · Role knowledge ·
+                Problem solving · Stakeholder management
+            </p>
+
+            <h3>⭐ What to Prepare</h3>
+            <p>
+                Understand the role requirements, prepare examples from
+                your experience, and be ready to explain your impact.
+            </p>
+
+        </div>
+    `;
+
+    document.querySelector(".hero").after(result);
+
+    result.scrollIntoView({
+        behavior: "smooth"
+    });
 }
 </script>
 </body>
