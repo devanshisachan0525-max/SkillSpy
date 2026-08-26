@@ -46,7 +46,7 @@ For resumes and job applications, focus on measurable achievements, relevant key
 
 Do not assume the user is in any particular country. If location is important and has not been provided, mention that requirements may vary by location rather than making an unsupported assumption.
 
-Keep responses clear, useful and appropriately concise while providing enough detail to be actionable.""
+Keep responses clear, useful and appropriately concise while providing enough detail to be actionable."
               }
             ]
           },
