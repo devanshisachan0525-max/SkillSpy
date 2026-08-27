@@ -964,16 +964,106 @@ function analyzeJobDescription() {
             throw new Error(data.error || "Something went wrong.");
         }
 
-        botMessage.innerHTML =
-  (data.answer || "Sorry, I couldn't generate a response.")
-    .replace(/\\([*_#-])/g, "$1")
-    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-    .replace(/^### (.*)$/gm, "<h3>$1</h3>")
-    .replace(/^## (.*)$/gm, "<h2>$1</h2>")
-    .replace(/^# (.*)$/gm, "<h1>$1</h1>")
-    .replace(/^\* (.*)$/gm, "• $1")
-    .replace(/^---$/gm, "<hr>")
-    .replace(/\n/g, "<br>");
+       const answer = data.answer || "Sorry, I couldn't generate a response.";
+
+const lines = answer
+  .replace(/\\([*_#-])/g, "$1")
+  .split("\n");
+
+let html = "";
+let inTable = false;
+
+for (let i = 0; i < lines.length; i++) {
+  let line = lines[i].trim();
+
+  if (!line) {
+    if (!inTable) html += "<br>";
+    continue;
+  }
+
+  // Markdown table
+  if (line.startsWith("|") && line.endsWith("|")) {
+    const cells = line
+      .split("|")
+      .slice(1, -1)
+      .map(cell => cell.trim());
+
+    // Skip markdown separator row
+    if (cells.every(cell => /^:?-+:?$/.test(cell))) {
+      continue;
+    }
+
+    if (!inTable) {
+      html += "<table><thead><tr>";
+      cells.forEach(cell => {
+        html += `<th>${cell}</th>`;
+      });
+      html += "</tr></thead><tbody>";
+      inTable = true;
+    } else {
+      html += "<tr>";
+      cells.forEach(cell => {
+        html += `<td>${cell}</td>`;
+      });
+      html += "</tr>";
+    }
+
+    // Close table when next line isn't a table
+    if (
+      !lines[i + 1] ||
+      !lines[i + 1].trim().startsWith("|")
+    ) {
+      html += "</tbody></table>";
+      inTable = false;
+    }
+
+    continue;
+  }
+
+  // Headings
+  if (line.startsWith("### ")) {
+    html += `<h3>${line.substring(4)}</h3>`;
+    continue;
+  }
+
+  if (line.startsWith("## ")) {
+    html += `<h2>${line.substring(3)}</h2>`;
+    continue;
+  }
+
+  if (line.startsWith("# ")) {
+    html += `<h1>${line.substring(2)}</h1>`;
+    continue;
+  }
+
+  // Horizontal line
+  if (line === "---") {
+    html += "<hr>";
+    continue;
+  }
+
+  // Bullets
+  if (line.startsWith("* ")) {
+    html += `<div class="bullet">• ${line.substring(2)}</div>`;
+    continue;
+  }
+
+  // Numbered list
+  if (/^\d+\.\s/.test(line)) {
+    html += `<div class="numbered">${line}</div>`;
+    continue;
+  }
+
+  // Bold
+  line = line.replace(
+    /\*\*(.*?)\*\*/g,
+    "<strong>$1</strong>"
+  );
+
+  html += `<div>${line}</div>`;
+}
+
+botMessage.innerHTML = html;
 
     } catch (error) {
         console.error("AI Chat Error:", error);
