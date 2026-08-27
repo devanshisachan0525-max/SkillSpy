@@ -965,9 +965,10 @@ function analyzeJobDescription() {
         }
 
         botMessage.innerHTML =
-    (data.answer || "Sorry, I couldn't generate a response.")
-      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-      .replace(/\n/g, "<br>");
+  (data.answer || "Sorry, I couldn't generate a response.")
+    .replace(/\\([*_#-])/g, "$1")
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\n/g, "<br>");
 
     } catch (error) {
         console.error("AI Chat Error:", error);
