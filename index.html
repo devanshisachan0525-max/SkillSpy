@@ -986,7 +986,11 @@ for (let i = 0; i < lines.length; i++) {
     const cells = line
       .split("|")
       .slice(1, -1)
-      .map(cell => cell.trim());
+      .map(cell =>
+  cell
+    .trim()
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+);
 
     // Skip markdown separator row
     if (cells.every(cell => /^:?-+:?$/.test(cell))) {
