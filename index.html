@@ -968,6 +968,11 @@ function analyzeJobDescription() {
   (data.answer || "Sorry, I couldn't generate a response.")
     .replace(/\\([*_#-])/g, "$1")
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/^### (.*)$/gm, "<h3>$1</h3>")
+    .replace(/^## (.*)$/gm, "<h2>$1</h2>")
+    .replace(/^# (.*)$/gm, "<h1>$1</h1>")
+    .replace(/^\* (.*)$/gm, "• $1")
+    .replace(/^---$/gm, "<hr>")
     .replace(/\n/g, "<br>");
 
     } catch (error) {
