@@ -964,8 +964,10 @@ function analyzeJobDescription() {
             throw new Error(data.error || "Something went wrong.");
         }
 
-        botMessage.textContent =
-            data.answer || "Sorry, I couldn't generate a response.";
+        botMessage.innerHTML =
+    (data.answer || "Sorry, I couldn't generate a response.")
+      .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\n/g, "<br>");
 
     } catch (error) {
         console.error("AI Chat Error:", error);
